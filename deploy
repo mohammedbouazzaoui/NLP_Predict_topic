@@ -1,0 +1,17 @@
+#BUILD DOCKER
+docker build . -t tax-predict
+docker run -d -p 5000:5000 tax-predict
+
+#DEPLOY TO HEROKU
+sudo heroku login
+sudo heroku container:login
+sudo heroku container:push web -a tax-predict
+sudo heroku container:release web -a tax-predict
+
+heroku logs --tail -a tax-predict
+
+
+###############
+
+apt-get install iputils-ping
+apt-get install net-tools

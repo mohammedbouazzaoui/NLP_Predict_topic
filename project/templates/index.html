@@ -1,0 +1,114 @@
+<!doctype hmtl>
+
+<title >Turbo Tax Predictor</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/index.css') }}">
+
+<body>
+    
+
+<section class="content">
+
+    {% for mesg in get_flashed_messages() %}
+    <h4>{{ mesg }}</h4>
+    {% endfor %}
+    <header>
+
+        <h1 style="text-align: center;">Welcome to the Turbo Tax Predictor</h1>
+        <img style="display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;" src="{{ url_for('static', filename='accountant.webp') }}"/>
+    </header>
+    <br><br>
+
+    <div class="column">
+        <form id="txt" action="" method="POST">
+            <div>
+                <p> <label for="text" class="form-label">Input Text:</label></p>
+                <p><textarea class="form-control" name="text" id="text" cols="30" rows="10"></textarea></p>
+                <p><input class="btn btn-success" type="submit" name="action" value="Predict">
+                    <input class="btn btn-primary" type="submit" name="action" value="Keywords">
+            </div>
+        </form>
+    </div>
+    <div class="column">
+        <form id="txtfile" action="" enctype="multipart/form-data" method="POST">
+            <div>
+                <p>Upload Textfile:</p>
+                <p><input class="btn btn-secondary" id="upload_button" type="file" name="file"></p>
+                <p><input class="btn btn-success" type="submit" name="action" value="Predict">
+                    <input class="btn btn-primary" type="submit" name="action" value="Keywords">
+            </div>
+        </form>
+    </div>
+
+
+    {% if keywords %}
+    <div class="column">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Keywords</th>
+                    <th scope="col">Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in keywords.items() %}
+                <tr>
+                    <td> {{ key }}&nbsp; </td>
+                    <td style="text-align:center;"> {{ value }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+
+
+
+
+
+    {% if result %}
+    <div class="column">
+        <h3> Tax Related Score : {{result}} </h3>
+        <br>
+        <div class="column">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Topics</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for value in prediction[:3] %}
+                    <tr>
+                        <td style="text-align:center;"> {{ value[1][0] }} </td>
+                        <td style="text-align:center;"> {{ value[0] }} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    {% endif %}
+
+
+
+
+</section>
+<div class="footer">
+    <h3>
+        How it's made &nbsp;<a href="https://github.com/FrederickFranck/NLP-assignment" target="_blank"><img width="35"
+                height="35" src="{{ url_for('static', filename='github_logo_b.png') }}" alt="github_logo"></a>
+    </h3>
+
+</div>
+
+</body>
+
+</html>

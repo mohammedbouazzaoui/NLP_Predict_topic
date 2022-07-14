@@ -1,0 +1,10 @@
+/project/notebooks
+/project/data
+/project/scrapping
+/project/main.py
+
+deploy
+Readme.md
+.gitignore
+
+!/project/data/tax_keywords_nl.pkl

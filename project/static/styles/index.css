@@ -1,0 +1,32 @@
+h4 {
+  background-color: yellow;
+  color: red;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: xx-large;
+}
+
+
+.column {
+    padding: 1%;
+    float: left;
+    width: 31%;
+    font-size: 20px;
+    display: block;
+    margin-bottom: 70px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+
+.content {
+    max-width: 70%;
+    margin: auto;
+    margin-bottom: 340px;
+  } 
